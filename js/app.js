@@ -76,7 +76,11 @@ function createEmployeeCard(employee) {
     <button class="remove-btn" title="Supprimer">X</button>
   `;
 
-  li.querySelector('.remove-btn').addEventListener('click', () => li.remove());
+  li.querySelector('.remove-btn').addEventListener('click', (e) => {
+    e.stopPropaganda();
+    const card = e.currentTarget.closest('.employee-card');
+    elements.unassignedList.appendChild(card);
+    });
 
 
   li.addEventListener('dragstart', () => li.classList.add('dragging'));
