@@ -14,14 +14,14 @@ function getElements() {
   phoneInput: document.getElementById('phone'),
   photoInput: document.getElementById('photo'),
   experienceList: document.getElementById('experience-list'),
-  modal: document.getElementById('profile-modal'),
-  photo: document.getElenebtById('profile-photo'),
+  profileModal: document.getElementById('profile-modal'),
+  photo: document.getElementById('profile-photo'),
   nameEl: document.getElementById('profile-name'),
   roleEl: document.getElementById('profile-role'),
   emailEl: document.getElementById('profile-email'),
   phoneEl: document.getElementById('profile-phone'),
   localEl: document.getElementById('profile-location'),
-  expList: document.getElementById('profile-experience'),
+  expList: document.getElementById('profile-experiences'),
   closeProfileModal: document.getElementById('close-profile-modal'),
   }
 };
@@ -51,6 +51,7 @@ elements.addExperienceBtn.addEventListener('click', () => {
   div.innerHTML = `
     <input type="text" placeholder="Nom de l'entreprise" class="exp-company" required>
     <input type="text" placeholder="Rôle" class="exp-role" required>
+    <input type="text" id="location" placeholder="Localisation">
     <input type="month" class="exp-start" required>
     <input type="month" class="exp-end" required>
     <button type="button" class="remove-exp-btn">Supprimer</button>
@@ -81,6 +82,11 @@ function createEmployeeCard(employee) {
   li.addEventListener('dragstart', () => li.classList.add('dragging'));
   li.addEventListener('dragend', () => li.classList.remove('dragging'));
 
+  li.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-btn')) return;
+    openProfile(employee);
+  });
+
   return li;
 };
 
@@ -95,20 +101,34 @@ function canEnterZone(role, zone) {
   if (rules[zone]) return rules[zone].includes(role);
   return true;
 
-
-  li.addEventListener('click', (e) => {
+}
+  /*li.addEventListener('click', (e) => {
     if (e.target.classList.contains('remove-btn')) return;
     openProfile();
-  });
-}
+  });*/
 
 function openProfile(employee) {
   elements.photo.src = employee.photo;
   elements.nameEl.textContent = employee.name;
   elements.roleEl.textContent = employee.role;
-  elments.emailEl.text
-}
+  elements.emailEl.textContent = employee.email;
+  elements.phoneEl.textContent = employee.phone || 'N/A';
+  elements.localEl.textContent = employee.location || 'N/A';
+  
+  const ul = elements.expList;
+  ul.innerHTML = '';
+  employee.experiences.forEach(exp => {
+    const li = document.createElement('li');
+    li.textContent = `${exp.company} - ${exp.role} - (${exp.start} -> ${exp.end})`
+    ul.appendChild(li);
+  });
 
+  /*document.getElementById('profile-modal').classList.remove('hidden');*/
+  showModal(elements.profileModal);
+}
+elements.closeProfileModal.addEventListener('click', () => {
+  hideModal(elements.profileModal);
+});
 
 elements.employeeForm.addEventListener('submit', e => {
   e.preventDefault();
