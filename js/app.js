@@ -41,7 +41,7 @@ elements.closeModalBtn.addEventListener('click', closeModal);
 
 
 elements.photoInput.addEventListener('input', () => {
-  const url = elements.photoInput.value.trim() || 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg';
+  const url = elements.photoInput.value.trim(); 
   elements.photoPreview.innerHTML = `<img src="${url}" alt="Photo Preview" style="width:100%;border-radius:6px;">`;
 });
 
@@ -106,10 +106,6 @@ function canEnterZone(role, zone) {
   return true;
 
 }
-  /*li.addEventListener('click', (e) => {
-    if (e.target.classList.contains('remove-btn')) return;
-    openProfile();
-  });*/
 
 function openProfile(employee) {
   elements.photo.src = employee.photo;
@@ -127,7 +123,7 @@ function openProfile(employee) {
     ul.appendChild(li);
   });
 
-  /*document.getElementById('profile-modal').classList.remove('hidden');*/
+  
   showModal(elements.profileModal);
 }
 elements.closeProfileModal.addEventListener('click', () => {
@@ -200,7 +196,6 @@ document.querySelectorAll('.zone').forEach(zoneDiv => {
     const unassignedWorkers = Array.from(elements.unassignedList.children);
     if (unassignedWorkers.length === 0) { alert('Aucun employé non assigné.'); return; }
 
-    // Show a simple prompt to pick a worker by index
     let message = 'Choisir un employé à assigner:\n';
     unassignedWorkers.forEach((li, idx) => {
       message += `${idx + 1}: ${li.dataset.name} (${li.dataset.role})\n`;
