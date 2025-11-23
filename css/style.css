@@ -53,6 +53,10 @@ body { display:flex; height:100vh; background:#121212; color:#e5e5e5; }
 #profile-experiences { list-style:none; padding:0; }
 #profile-experiences li { padding:5px 10px; background:#2a2a2a; border-radius:4px; margin-bottom:5px; font-size:13px; }
 
+.sidebar-footer { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); background: #1a1a1a; padding: 15px 20px; border-radius: 10px; border: 1px solid #2e2e2e; text-align: center; font-size: 13px; color: #bbb; box-shadow: 0 0 10px rgba(0,0,0,0.4); backdrop-filter: blur(4px);}
+.sidebar-footer a { color: #999; text-decoration: none; font-size: 12px; }
+.sidebar-footer a:hover { color: #fff; text-decoration: underline; }
+
 
 @media(max-width:900px){ #workspace { grid-template-columns:repeat(2,1fr);} }
 @media(max-width:600px){ 
