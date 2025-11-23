@@ -77,7 +77,7 @@ function createEmployeeCard(employee) {
   `;
 
   li.querySelector('.remove-btn').addEventListener('click', (e) => {
-    e.stopPropaganda();
+    e.stopPropagation();
     const card = e.currentTarget.closest('.employee-card');
     elements.unassignedList.appendChild(card);
     });
@@ -102,7 +102,7 @@ function canEnterZone(role, zone) {
     archives: ['Manager']
   };
   if (zone === 'archives' && role === 'Nettoyage') return false;
-  if (rules[zone]) return rules[zone].includes(role);
+  if (rules[zone]) return rules.zone.includes(role);
   return true;
 
 }
