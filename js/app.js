@@ -95,17 +95,21 @@ function createEmployeeCard(employee) {
 };
 
 function canEnterZone(role, zone) {
-  const rules = {
-    reception: ['Réceptionniste', 'Manager'],
-    serveurs: ['Technicien IT', 'Manager'],
-    securite: ['Agent de sécurité', 'Manager'],
-    archives: ['Manager']
-  };
-  if (zone === 'archives' && role === 'Nettoyage') return false;
-  if (rules[zone]) return rules.zone.includes(role);
-  return true;
+  if (role === 'Manager') return true;
 
+  if (role === 'Nettoyage' && zone === 'archives') return false;
+
+  const zoneRules = {
+    reception: ['Réceptionniste'],
+    serveurs: ['Technicien IT'],
+    securite: ['Agent de sécurité'],
+    archives: [], 
+  };
+
+  if (zoneRules[zone]) {return zoneRules[zone].includes(role);}
+  return true;
 }
+
 
 function openProfile(employee) {
   elements.photo.src = employee.photo;
